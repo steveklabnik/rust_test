@@ -3,6 +3,7 @@ use std::fs;
 use std::io::{Write, SeekFrom, Seek};
 use std::os::unix::prelude::AsRawFd;
 use mmap::{MemoryMap, MapOption};
+use libc;
 
 pub struct fpga_awg {
         mmap: MemoryMap,
@@ -40,7 +41,7 @@ impl fpga_awg {
 		fpga_awg {mmap: mmap, data: data}
 	}
 
-	fn toggle(self, led_pin: u32) {
+	pub fn toggle(&mut self, led_pin: u32) {
     		unsafe {
         		*(self.data.offset(0x30) as *mut u32) ^= 1 << led_pin;
     		}

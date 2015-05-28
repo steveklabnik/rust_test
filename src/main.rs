@@ -8,7 +8,7 @@ mod fpga_awg;
 
 fn main() {
     if let Some(arg1) = env::args().nth(1) {
-        let mut awg = fpga_awg::new();
+        let mut awg = fpga_awg::fpga_awg::new();
 
         while (true) {
             awg.toggle(1);
